@@ -7,4 +7,6 @@ public interface ICountryService {
 	
 	public void crateCountryData(Country country);//method creation
 
+	public Country getCountryDetails();
+
 }

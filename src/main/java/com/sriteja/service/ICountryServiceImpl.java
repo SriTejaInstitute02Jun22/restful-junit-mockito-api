@@ -17,4 +17,17 @@ public class ICountryServiceImpl implements ICountryService{
 		
 	}
 
+	@Override
+	public Country getCountryDetails() {
+		
+		//Country Object creation
+		Country country = new Country();
+		country.setCountryName("US");
+		country.setCountryCapital("Donbos");
+		country.setCountryCode("+1");
+		country.setCountryCurrency("$");
+		
+		return country;
+	}
+
 }

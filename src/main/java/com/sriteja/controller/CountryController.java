@@ -3,6 +3,7 @@ package com.sriteja.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +24,28 @@ public class CountryController {
 	private ICountryService iCountryService; 
 	
 	
+	/**
+	 * crating the new country object
+	 * @param country
+	 * 
+	 * **/
 	@PostMapping("/create-country")
 	public void createCountryData(@RequestBody Country country) {
 		logger.info("Country Details in Controller :: "+country);
 		iCountryService.crateCountryData(country); //method calling
 		
 	}
+	
+	/**
+	 * get the country details
+	 * @return Country
+	 * */
+	@GetMapping("/get-country-details")
+	public Country getCountryDetails() {
+		Country countryDetails =  iCountryService.getCountryDetails();//method calling
+		return countryDetails;
+	}
 
+	
 	
 }

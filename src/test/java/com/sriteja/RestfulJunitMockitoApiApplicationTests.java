@@ -8,6 +8,7 @@ class RestfulJunitMockitoApiApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("============");
 	}
 
 }
