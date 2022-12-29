@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sriteja.bean.Company;
 import com.sriteja.bean.Country;
 import com.sriteja.service.ICountryService;
 
@@ -43,6 +44,11 @@ public class CountryController {
 	@GetMapping("/get-country-details")
 	public Country getCountryDetails() {
 		Country countryDetails =  iCountryService.getCountryDetails();//method calling
+		
+		//new calling controller to service layer 
+		//get the Company details
+		Company companyDetails = iCountryService.getCompanyDetails();//method calling
+		logger.info("Company Details in Controller :: "+companyDetails);
 		return countryDetails;
 	}
 

@@ -16,6 +16,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sriteja.bean.Company;
 import com.sriteja.bean.Country;
 import com.sriteja.service.ICountryService;
 
@@ -61,7 +62,6 @@ public class CountryControllerTest {
 	}
 
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testGetCountryDetails() throws Exception {
 
@@ -75,7 +75,26 @@ public class CountryControllerTest {
 		String getEndPointURL = "/country/api/get-country-details";
 		
 		//Country countryDetails =  iCountryService.getCountryDetails();
+		//calling to mock object(Service Layer interface(ICountryService)) and get the response
+		
+		//Country countryDetails =  iCountryService.getCountryDetails();//method calling
+		
 		when(iCountryServiceMock.getCountryDetails()).thenReturn(country);
+		
+		
+		//call to mock object and get the company details
+		//Company companyDetails = iCountryService.getCompanyDetails();//method calling
+		
+		//creating the Company object
+		//create the Company Object
+		Company company = new Company();
+		company.setCompanyName("IBM");
+		company.setCompanyEmail("ramesh@ibm.com");
+		company.setCompanyMobile("+91232323");
+		company.setCompanyLocation("Hyderabad");
+		
+		when(iCountryServiceMock.getCompanyDetails()).thenReturn(company);
+		
 	
 		
 		// method calling - get method

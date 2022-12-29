@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.sriteja.bean.Company;
 import com.sriteja.bean.Country;
 
 @Service
@@ -28,6 +29,19 @@ public class ICountryServiceImpl implements ICountryService{
 		country.setCountryCurrency("$");
 		
 		return country;
+	}
+
+	@Override
+	public Company getCompanyDetails() {
+		
+		//create the Company Object
+		Company company = new Company();
+		company.setCompanyName("IBM");
+		company.setCompanyEmail("ramesh@ibm.com");
+		company.setCompanyMobile("+91232323");
+		company.setCompanyLocation("Hyderabad");
+		
+		return company;
 	}
 
 }
