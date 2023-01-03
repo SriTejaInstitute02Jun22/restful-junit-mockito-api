@@ -1,0 +1,10 @@
+step1: first open sql plus and connect to the sql.
+
+step2: following below cmd to create the new user and give permission.
+--how to create the users/account/schema in database?
+create user <user_name> identified by <password>;	--syntax
+create user sriteja identified by sriteja;			--example
+
+--how to give the permissions to that users?  
+grant connect, resource to <user_name>;				--syntax
+grant connect, resource to sriteja;					--example
