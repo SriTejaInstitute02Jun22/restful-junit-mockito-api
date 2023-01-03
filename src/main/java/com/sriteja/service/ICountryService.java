@@ -1,7 +1,8 @@
 package com.sriteja.service;
 
 import com.sriteja.bean.Company;
-import com.sriteja.bean.Country;
+import com.sriteja.model.Country;
+
 
 public interface ICountryService {
 

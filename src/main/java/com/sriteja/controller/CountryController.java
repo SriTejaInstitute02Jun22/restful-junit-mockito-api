@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sriteja.bean.Company;
-import com.sriteja.bean.Country;
+import com.sriteja.model.Country;
 import com.sriteja.service.ICountryService;
 
 @RestController
