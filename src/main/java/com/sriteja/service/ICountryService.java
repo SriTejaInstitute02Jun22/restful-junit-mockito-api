@@ -9,8 +9,8 @@ public interface ICountryService {
 	
 	public void crateCountryData(Country country);//method creation
 
-	public Country getCountryDetails();
+	public Country getCountryDetails(String countryName);//method creation
 	
-	public Company getCompanyDetails();
+	public Company getCompanyDetails();//method creation
 
 }

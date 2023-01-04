@@ -14,6 +14,10 @@ public class ICountryServiceImpl implements ICountryService{
 
 	private static final Logger logger = LoggerFactory.getLogger(ICountryServiceImpl.class);
 	
+	/**
+	 * creating the DI(dependency injection) to DAO layer interface
+	 * CountryReposiotry countryReposiotry = new CountryReposiotry();
+	 * */
 	@Autowired
 	private CountryReposiotry countryReposiotry;
 	
@@ -25,14 +29,9 @@ public class ICountryServiceImpl implements ICountryService{
 	}
 
 	@Override
-	public Country getCountryDetails() {
+	public Country getCountryDetails(String countryName) {
 		
-		//Country Object creation
-		Country country = new Country();
-		country.setCountryName("US");
-		//country.setCountryCapital("Donbos");
-		country.setCountryCode("+1");
-		country.setCountryCurrency("$");
+		Country country = countryReposiotry.findByCountryName(countryName);
 		
 		return country;
 	}
