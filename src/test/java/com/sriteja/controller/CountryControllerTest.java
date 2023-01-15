@@ -1,5 +1,6 @@
 package com.sriteja.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -15,9 +16,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sriteja.bean.Company;
 import com.sriteja.model.Country;
 import com.sriteja.service.ICountryService;
 
@@ -33,6 +35,7 @@ public class CountryControllerTest {
 
 	@Autowired
 	private ObjectMapper objectMapper;
+	
 
 	@Test
 	public void testCreateCountryData() throws Exception {
@@ -62,54 +65,35 @@ public class CountryControllerTest {
 				.andReturn();
 	}
 
-	@Ignore
+
 	@Test
 	public void testGetCountryDetails() throws Exception {
 
-		// response object
-		Country country = new Country();
-		country.setCountryName("US");
-		//country.setCountryCapital("Donbos");
-		country.setCountryCode("+1");
-		country.setCountryCurrency("$");
-
-		String getEndPointURL = "/country/api/get-country-details";
+		String countryName = "India";
+		Country countryDetails = new Country();
+		countryDetails.setCountryName("India");
+		countryDetails.setCountryCaptital("Dhilli");
+		countryDetails.setCountryCode("+91");
+		countryDetails.setCountryCurrency("Rupees");
+		countryDetails.setCountryId(21);
+		//Country countryDetails =  iCountryService.getCountryDetails(countryName);//method calling
+		//when() or given() is using to get the data from mock objects
+		when(iCountryServiceMock.getCountryDetails(countryName)).thenReturn(countryDetails);
 		
-		//Country countryDetails =  iCountryService.getCountryDetails();
-		//calling to mock object(Service Layer interface(ICountryService)) and get the response
+		String getRequestURL = "/country/api/get-country-details";
+		//@GetMapping("/get-country-details")
+		//public Country getCountryDetails(@RequestParam String countryName) {
+		MockHttpServletResponse getResponse = mockMvc.perform(get(getRequestURL)
+				.param("countryName", countryName))
+			   .andExpect(status().isOk()) //status code 200
+			   .andDo(print())
+			   .andReturn()
+			   .getResponse();
+		String result = getResponse.getContentAsString();
+		Country countryResponse = objectMapper.readValue(result, Country.class);
+		//assertEquals(expected, actual);
+		assertEquals(countryName, countryResponse.getCountryName());
 		
-		//Country countryDetails =  iCountryService.getCountryDetails();//method calling
-		
-	//	when(iCountryServiceMock.getCountryDetails()).thenReturn(country);
-		
-		
-		//call to mock object and get the company details
-		//Company companyDetails = iCountryService.getCompanyDetails();//method calling
-		
-		//creating the Company object
-		//create the Company Object
-		Company company = new Company();
-		company.setCompanyName("IBM");
-		company.setCompanyEmail("ramesh@ibm.com");
-		company.setCompanyMobile("+91232323");
-		company.setCompanyLocation("Hyderabad");
-		
-		//when(iCountryServiceMock.getCompanyDetails()).thenReturn(company);
-		
-	
-		
-		// method calling - get method
-		/*MockHttpServletResponse getResponse = mockMvc
-				.perform(get(getEndPointURL).accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andReturn()
-				.getResponse();
-		
-		String response = getResponse.getContentAsString();
-		Country countryDetails = objectMapper.readValue(response, Country.class);
-		System.out.println("Country Details======"+countryDetails);
-		Assert.assertEquals(country.getCountryName(), countryDetails.getCountryName());	//assertEquals(objExpected, objActual);  
-	*/
 	}
 
 }
